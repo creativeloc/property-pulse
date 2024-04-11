@@ -30,7 +30,26 @@ const PropertyAddForm = () => {
     images: []
   })
 
-  const handleChange = () => {}
+  const handleChange = (e) => {
+    const { name, value } = e.target
+
+    if (name.includes(".")) {
+      const [outerKey, innerKey] = name.split(".")
+
+      setFields((prevFields) => ({
+        ...prevFields,
+        [outerKey]: {
+          ...prevFields[outerKey],
+          [innerKey]: value
+        }
+      }))
+    } else {
+      setFields((prevFields) => ({
+        ...prevFields,
+        [name]: value
+      }))
+    }
+  }
   const handleAmenitiesChange = () => {}
   const handleImageChange = () => {}
 
@@ -43,8 +62,8 @@ const PropertyAddForm = () => {
           Property Type
         </label>
         <select
-          id="property_type"
-          name="property_type"
+          id="type"
+          name="type"
           className="border rounded w-full py-2 px-3"
           required
           value={fields.type}
