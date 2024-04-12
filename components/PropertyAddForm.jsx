@@ -33,6 +33,7 @@ const PropertyAddForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target
 
+    // Check if nested property
     if (name.includes(".")) {
       const [outerKey, innerKey] = name.split(".")
 
@@ -44,13 +45,37 @@ const PropertyAddForm = () => {
         }
       }))
     } else {
+      // If Not nested
       setFields((prevFields) => ({
         ...prevFields,
         [name]: value
       }))
     }
   }
-  const handleAmenitiesChange = () => {}
+  const handleAmenitiesChange = (e) => {
+    const { value, checked } = e.target
+
+    // Clone the amenities array
+    const updatedAmenities = [...fields.amenities]
+
+    if (checked) {
+      // Add the value to the array
+      updatedAmenities.push(value)
+    } else {
+      // Remove value from array
+      const index = updatedAmenities.indexOf(value)
+
+      if (index !== -1) {
+        updatedAmenities.splice(index, 1)
+      }
+    }
+
+    // Update state with updates array
+    setFields((prevFields) => ({
+      ...prevFields,
+      amenities: updatedAmenities
+    }))
+  }
   const handleImageChange = () => {}
 
   return (
