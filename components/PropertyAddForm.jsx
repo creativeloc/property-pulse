@@ -76,7 +76,23 @@ const PropertyAddForm = () => {
       amenities: updatedAmenities
     }))
   }
-  const handleImageChange = () => {}
+  const handleImageChange = (e) => {
+    const { files } = e.target
+
+    // Clone images array
+    const updatedImages = [...fields.images]
+
+    // Add new file(s) to the array
+    for (const file of files) {
+      updatedImages.push(file)
+    }
+
+    // state with array of images
+    setFields((prevFields) => ({
+      ...prevFields,
+      images: updatedImages
+    }))
+  }
 
   return (
     <form>
