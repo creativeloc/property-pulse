@@ -41,7 +41,35 @@ const ProfilePage = () => {
     }
   }, [session])
 
-  const handleDeleteProperty = () => {}
+  const handleDeleteProperty = async (propertyId) => {
+    const confirmed = window.confirm(
+      "Are You Sure you want to delete this property?"
+    )
+
+    if (!confirmed) return
+
+    try {
+      const res = await fetch(`/api/properties/${propertyId}`, {
+        method: "DELETE"
+      })
+
+      if (res.status === 200) {
+        // Remove the property from the state
+        const updatedProperties = properties.filter(
+          (property) => property._id !== propertyId
+        )
+
+        setProperties(updatedProperties)
+
+        alert("Property Deleted")
+      } else {
+        alert("Failed to delete property")
+      }
+    } catch (error) {
+      console.error(error)
+      alert("Failed to delete property")
+    }
+  }
 
   return (
     <section className="bg-blue-50">
