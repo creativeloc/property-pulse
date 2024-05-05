@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect } from "react"
 
 const PropertyAddForm = () => {
@@ -50,7 +49,7 @@ const PropertyAddForm = () => {
         }
       }))
     } else {
-      // If Not nested
+      // Not nested
       setFields((prevFields) => ({
         ...prevFields,
         [name]: value
@@ -60,25 +59,25 @@ const PropertyAddForm = () => {
   const handleAmenitiesChange = (e) => {
     const { value, checked } = e.target
 
-    // Clone the amenities array
-    const updatedAmenities = [...fields.amenities]
+    // Clone the current array
+    const updatedAmenites = [...fields.amenities]
 
     if (checked) {
-      // Add the value to the array
-      updatedAmenities.push(value)
+      // Add value to array
+      updatedAmenites.push(value)
     } else {
       // Remove value from array
-      const index = updatedAmenities.indexOf(value)
+      const index = updatedAmenites.indexOf(value)
 
       if (index !== -1) {
-        updatedAmenities.splice(index, 1)
+        updatedAmenites.splice(index, 1)
       }
     }
 
-    // Update state with updates array
+    // Update state with updated array
     setFields((prevFields) => ({
       ...prevFields,
-      amenities: updatedAmenities
+      amenities: updatedAmenites
     }))
   }
 
@@ -88,12 +87,12 @@ const PropertyAddForm = () => {
     // Clone images array
     const updatedImages = [...fields.images]
 
-    // Add new file(s) to the array
+    // Add new files to the array
     for (const file of files) {
       updatedImages.push(file)
     }
 
-    // state with array of images
+    // Update state with array of images
     setFields((prevFields) => ({
       ...prevFields,
       images: updatedImages

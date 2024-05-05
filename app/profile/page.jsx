@@ -29,7 +29,7 @@ const ProfilePage = () => {
           setProperties(data)
         }
       } catch (error) {
-        console.error(error)
+        console.log(error)
       } finally {
         setLoading(false)
       }
@@ -66,7 +66,7 @@ const ProfilePage = () => {
         alert("Failed to delete property")
       }
     } catch (error) {
-      console.error(error)
+      console.log(error)
       alert("Failed to delete property")
     }
   }
