@@ -13,13 +13,13 @@ export const POST = async (request) => {
 
     const sessionUser = await getSessionUser()
 
-    if (!sessionUser || !sessionUser.userId) {
+    if (!session || !sessionUser.userId) {
       return new Response("User ID is required", { status: 401 })
     }
 
     const { userId } = sessionUser
 
-    // Find user in he database
+    // Find user in the database
     const user = await User.findOne({ _id: userId })
 
     // Check if property is bookmarked
@@ -33,9 +33,9 @@ export const POST = async (request) => {
       message = "Bookmark removed successfully"
       isBookmarked = false
     } else {
-      // If not booked marked, add bookmark to database
+      // If not bookmarked, add bookmark to database
       user.bookmarks.push(propertyId)
-      message = "Bookmark added successfully"
+      message = "Bookmark Added Successfully"
       isBookmarked = true
     }
 
@@ -46,6 +46,6 @@ export const POST = async (request) => {
     })
   } catch (error) {
     console.log(error)
-    return new Response("Something went wrong", { status: 500 })
+    return new Response("Something Went Wrong", { status: 500 })
   }
 }
