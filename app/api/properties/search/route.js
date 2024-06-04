@@ -10,9 +10,29 @@ export const GET = async (request) => {
     const location = searchParams.get("location")
     const propertyType = searchParams.get("propertyType")
 
-    console.log(location, propertyType)
+    const locationPattern = RegExp(location, "i")
 
-    return new Response(JSON.stringify({ message: "Success" }), { status: 200 })
+    // Match location patterns against database fields
+    let query = {
+      $or: [
+        { name: locationPattern },
+        { description: locationPattern },
+        { "location.street": locationPattern },
+        { "location.city": locationPattern },
+        { "location.state": locationPattern },
+        { "location.zipcode": locationPattern }
+      ]
+    }
+
+    // Only check for property if its not 'All'
+    if (propertyType && propertyType !== "All") {
+      const typePattern = new RegExp(propertyType, "i")
+      query.type = typePattern
+    }
+
+    const properties = await Property.find(query)
+
+    return new Response(JSON.stringify(properties), { status: 200 })
   } catch (error) {
     console.log(error)
     return new Response("Something went wrong", { status: 500 })
