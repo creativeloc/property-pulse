@@ -24,7 +24,7 @@ const PropertyContactForm = ({ property }) => {
 
     try {
       const res = await fetch("/api/messages", {
-        method: POST,
+        method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
