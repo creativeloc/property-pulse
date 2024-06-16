@@ -1,9 +1,9 @@
-const Message = () => {
+const Message = ({ message }) => {
   return (
     <div className="relative bg-white p-4 rounded-md shadow-md border border-gray-200">
       <h2 className="text-xl mb-4">
         <span className="font-bold">Property Inquiry:</span>
-        Boston Commons Retreat
+        {message.property.name}
       </h2>
       <p className="text-gray-700">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati
