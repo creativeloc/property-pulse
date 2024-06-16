@@ -42,7 +42,6 @@ const Messages = () => {
                 <Message key={message._id} message={message} />
               ))
             )}
-            <Message />
           </div>
         </div>
       </div>
